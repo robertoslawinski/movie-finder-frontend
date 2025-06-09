@@ -186,3 +186,12 @@ button:hover {
   80% { opacity: 1; }
   100% { opacity: 0; }
 }
+
+.error-message {
+  color: gold;
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  text-align: center;
+  width: 100%;
+}
