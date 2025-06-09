@@ -1,8 +1,8 @@
-import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import SearchResults from "./pages/SearchResults";
 import WatchlistPage from "./pages/WatchlistPage";
 import Navbar from "./components/Navbar";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   console.log("✅ App.jsx do Movie Finder carregado!");

@@ -1,53 +1,54 @@
+// src/pages/SearchResults.jsx
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { searchMovies } from "../services/api";
-import MovieCard from "../components/MovieCard";
+import { searchMovies, addToWatchlist } from "../services/api";
+import "./SearchResults.css";
 
 export default function SearchResults() {
-  const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
+  const [results, setResults] = useState([]);
+  const [showNotification, setShowNotification] = useState(false);
   const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const searchQuery = queryParams.get("search");
+
+  const query = new URLSearchParams(location.search).get("search");
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const results = await searchMovies(searchQuery);
-        if (results) {
-          setMovies(results);
+    if (query) {
+      searchMovies(query).then((data) => {
+        if (data) {
+          setResults(data);
         } else {
-          setMovies([]);
+          setResults([]);
         }
-      } catch (err) {
-        setError("Something went wrong while fetching movies.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (searchQuery) {
-      fetchData();
+      });
     }
-  }, [searchQuery]);
+  }, [query]);
+
+  const handleAdd = (movie) => {
+    addToWatchlist(movie).then(() => {
+      setShowNotification(true);
+      setTimeout(() => setShowNotification(false), 3000);
+    });
+  };
 
   return (
-    <div>
-      <h1>Search Results for: "{searchQuery}"</h1>
-      {loading && <p>Loading...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <div className="movies-grid">
-        {movies.length > 0 ? (
-          movies.map((movie) => (
-            <MovieCard key={movie.imdbID} movie={movie} />
-          ))
-        ) : (
-          !loading && <p>No results found.</p>
-        )}
-      </div>
+    <div className="results-container">
+      {showNotification && (
+        <div className="notification">Movie added to your watchlist!</div>
+      )}
+      {results.map((movie) => (
+        <div className="movie-card" key={movie.imdbID}>
+          <img
+            src={movie.Poster}
+            alt={movie.Title}
+            className="movie-poster"
+          />
+          <div className="movie-title">{movie.Title}</div>
+          <div className="movie-year">{movie.Year}</div>
+          <button className="action-button" onClick={() => handleAdd(movie)}>
+            ✨ Add to Watchlist
+          </button>
+        </div>
+      ))}
     </div>
   );
 }

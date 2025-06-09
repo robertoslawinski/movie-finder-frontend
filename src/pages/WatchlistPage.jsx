@@ -10,7 +10,6 @@ export default function WatchlistPage() {
   const [editReview, setEditReview] = useState("");
   const [editStatus, setEditStatus] = useState("Want to Watch");
 
-  // Buscar a lista atualizada
   const fetchWatchlist = async () => {
     try {
       const data = await getWatchlist();
@@ -26,7 +25,6 @@ export default function WatchlistPage() {
     fetchWatchlist();
   }, []);
 
-  // Deletar um filme
   const handleDelete = async (id) => {
     try {
       await deleteMovie(id);
@@ -36,7 +34,6 @@ export default function WatchlistPage() {
     }
   };
 
-  // Submeter edição
   const handleEditSubmit = async (e, id) => {
     e.preventDefault();
     try {
@@ -57,31 +54,32 @@ export default function WatchlistPage() {
       {loading ? (
         <p>Loading...</p>
       ) : watchlist.length > 0 ? (
-        <div className="movies-grid">
+        <div className="watchlist-container">
           {watchlist.map((movie) => (
             <div key={movie.id} className="movie-card">
-              <img src={movie.poster} alt={movie.title} />
-              <h3>{movie.title}</h3>
-              <p>{movie.year}</p>
+              <img src={movie.poster} alt={movie.title} className="movie-poster" />
+              <h3 className="movie-title">{movie.title}</h3>
+              <p className="movie-year">{movie.year}</p>
               <p>Status: {movie.status}</p>
               <p>Review: {movie.review || "No review yet."}</p>
 
-              <button onClick={() => handleDelete(movie.id)}>❌ Remove</button>
-
-              <button
-                onClick={() => {
-                  setEditingId(movie.id);
-                  setEditReview(movie.review);
-                  setEditStatus(movie.status);
-                }}
-              >
-                ✏️ Edit
-              </button>
+              <div style={{ display: "flex", gap: "0.5rem", justifyContent: "center" }}>
+                <button onClick={() => handleDelete(movie.id)}>❌ Remove</button>
+                <button
+                  onClick={() => {
+                    setEditingId(movie.id);
+                    setEditReview(movie.review);
+                    setEditStatus(movie.status);
+                  }}
+                >
+                  ✏️ Edit
+                </button>
+              </div>
 
               {editingId === movie.id && (
                 <form
                   onSubmit={(e) => handleEditSubmit(e, movie.id)}
-                  style={{ marginTop: "10px" }}
+                  style={{ marginTop: "10px", display: "flex", flexDirection: "column", gap: "0.5rem" }}
                 >
                   <select
                     value={editStatus}
@@ -90,17 +88,19 @@ export default function WatchlistPage() {
                     <option value="Want to Watch">Want to Watch</option>
                     <option value="Watched">Watched</option>
                   </select>
-                  <br />
+
                   <textarea
                     placeholder="Write your review..."
                     value={editReview}
                     onChange={(e) => setEditReview(e.target.value)}
                   />
-                  <br />
-                  <button type="submit">💾 Save</button>
-                  <button type="button" onClick={() => setEditingId(null)}>
-                    ❌ Cancel
-                  </button>
+
+                  <div style={{ display: "flex", gap: "0.5rem", justifyContent: "center" }}>
+                    <button type="submit">💾 Save</button>
+                    <button type="button" onClick={() => setEditingId(null)}>
+                      ❌ Cancel
+                    </button>
+                  </div>
                 </form>
               )}
             </div>
