@@ -19,7 +19,7 @@ export default function Home() {
       <img src={hatLogo} alt="Sorting Hat" className="home-logo" />
       <h1 className="home-title">Welcome to MuggleFlix</h1>
       <p className="home-subtitle">
-        Accio movies! Summon your favorite films like a true wizard 🧙‍♂️🍿
+        Accio movies! Summon your favorite films like a true wizard 
       </p>
       <form onSubmit={handleSubmit} className="home-form">
         <input
