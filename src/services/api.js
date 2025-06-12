@@ -1,17 +1,18 @@
 import axios from "axios";
 
-// Substitua com a sua chave válida da OMDb
-const API_KEY = "2d8a27db";
-const OMDB_URL = `https://www.omdbapi.com/?apikey=${API_KEY}`;
-const BACKEND_URL = "http://localhost:5005/watchlist";
 
-// Buscar filmes da OMDb API
+const API_KEY = import.meta.env.VITE_OMDB_API_KEY;
+const OMDB_URL = `https://www.omdbapi.com/?apikey=${API_KEY}`;
+const BACKEND_URL = `${import.meta.env.VITE_BACKEND_URL}/watchlist`;
+
+
+
 export const searchMovies = async (query) => {
   const response = await axios.get(`${OMDB_URL}&s=${query}`);
   return response.data.Search;
 };
 
-// Adicionar um filme à watchlist
+
 export const addToWatchlist = async (movie) => {
   const movieToAdd = {
     title: movie.Title,
@@ -25,18 +26,18 @@ export const addToWatchlist = async (movie) => {
   return axios.post(BACKEND_URL, movieToAdd);
 };
 
-// Obter toda a watchlist
+// watchlist
 export const getWatchlist = async () => {
   const response = await axios.get(BACKEND_URL);
   return response.data;
 };
 
-// Atualizar um filme
+// movies
 export const updateMovie = async (id, updates) => {
   return axios.patch(`${BACKEND_URL}/${id}`, updates);
 };
 
-// Remover um filme da watchlist
+// remove
 export const deleteMovie = async (id) => {
   return axios.delete(`${BACKEND_URL}/${id}`);
 };

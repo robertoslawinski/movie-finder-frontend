@@ -5,7 +5,7 @@ export default function WatchlistPage() {
   const [watchlist, setWatchlist] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Estados para edição
+
   const [editingId, setEditingId] = useState(null);
   const [editReview, setEditReview] = useState("");
   const [editStatus, setEditStatus] = useState("Want to Watch");
@@ -15,7 +15,7 @@ export default function WatchlistPage() {
       const data = await getWatchlist();
       setWatchlist(data);
     } catch (error) {
-      console.error("Error fetching watchlist:", error);
+      console.error(error);
     } finally {
       setLoading(false);
     }
@@ -30,7 +30,7 @@ export default function WatchlistPage() {
       await deleteMovie(id);
       setWatchlist((prev) => prev.filter((movie) => movie.id !== id));
     } catch (error) {
-      console.error("Error deleting movie:", error);
+      console.error(error);
     }
   };
 
@@ -44,7 +44,7 @@ export default function WatchlistPage() {
       setEditingId(null);
       fetchWatchlist();
     } catch (error) {
-      console.error("Error updating movie:", error);
+      console.error(error);
     }
   };
 
@@ -107,7 +107,7 @@ export default function WatchlistPage() {
           ))}
         </div>
       ) : (
-        <p>No movies in your watchlist yet.</p>
+        <p>No movies in your watchlist.</p>
       )}
     </div>
   );

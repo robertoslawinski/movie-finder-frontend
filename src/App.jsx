@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
-  console.log("✅ App.jsx do Movie Finder carregado!");
+  console.log("Loaded");
 
   return (
     <>

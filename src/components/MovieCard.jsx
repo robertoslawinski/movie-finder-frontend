@@ -6,7 +6,7 @@ export default function MovieCard({ movie }) {
       await addToWatchlist(movie);
       alert(`🎬 "${movie.Title}" added to your watchlist!`);
     } catch (error) {
-      console.error("Failed to add movie:", error);
+      console.error(error);
       alert("❌ Error adding movie to watchlist");
     }
   };

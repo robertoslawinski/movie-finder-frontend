@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=MedievalSharp&display=swap');
 
-/* RESET */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* GERAL */
+
 body {
   background-color: #1a1a1a;
   font-family: 'MedievalSharp', cursive;
@@ -15,7 +15,7 @@ body {
   text-align: center;
 }
 
-/* NAVBAR */
+
 .navbar {
   display: flex;
   align-items: center;
@@ -37,7 +37,7 @@ body {
   text-shadow: 0 0 10px gold;
 }
 
-/* FORM INPUT */
+
 input[type="text"] {
   padding: 0.5rem;
   font-size: 1rem;
@@ -63,7 +63,7 @@ button:hover {
   box-shadow: 0 0 10px gold;
 }
 
-/* CONTAINERS */
+
 .results-container,
 .watchlist-container {
   display: flex;
@@ -75,7 +75,7 @@ button:hover {
   min-height: 100vh;
 }
 
-/* MOVIE CARD */
+
 .movie-card {
   background: radial-gradient(circle, #3a2e1c 0%, #1b1a1a 100%);
   border: 2px solid #d4af37;
@@ -132,7 +132,7 @@ button:hover {
   background-color: #e1c16e;
 }
 
-/* LINKS */
+
 a {
   color: gold;
   text-decoration: none;
@@ -142,7 +142,7 @@ a:hover {
   text-shadow: 0 0 5px gold;
 }
 
-/* FORMULÁRIOS DE REVIEW */
+
 textarea {
   width: 100%;
   max-width: 90%;
